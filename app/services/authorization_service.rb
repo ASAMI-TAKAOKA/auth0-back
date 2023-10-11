@@ -21,6 +21,12 @@ class AuthorizationService
   # verify_token
   # json_web_token.rbを実行してTokenを渡す
   def verify_token
-    JsonWebToken.verify(http_token)
+    token = http_token
+    if token.present?
+      return JsonWebToken.verify(token)
+    else
+      # トークンが存在しない場合の処理(エラーハンドリング)
+      raise JWT::VerificationError, "No token provided"
+    end
   end
 end
