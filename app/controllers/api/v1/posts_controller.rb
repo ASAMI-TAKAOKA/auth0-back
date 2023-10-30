@@ -36,6 +36,9 @@ class Api::V1::PostsController < SecuredController
   private
 
   def post_params
+    
+    # binding.pry
+    
     params.permit(:title,:caption)
   end
 end
